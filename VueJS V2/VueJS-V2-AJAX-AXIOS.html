@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueJS V2 | AJAX - AXIOS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col-sm-4">
+                <h1>Lista VueJS | AJAX - AXIOS</h1>
+                <ul class="list-group">
+                    <li v-for="item in lists" class="list-group-item">
+                        {{item.name.first}} {{item.name.last}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-8">
+                <h1>JSON</h1>
+                <pre>
+                        {{ $data | json }}
+                </pre>
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    
+    <script type="text/javascript">
+
+        var urlUsers2 = 'https://randomuser.me/api/?results=10';
+        new Vue({
+            el:'#app',
+            created: function() {
+                this.getUsers();
+            },
+            data:{
+                lists: []
+            },
+            methods: {
+                getUsers: function(){
+                    axios.get(urlUsers2).then(Response =>{
+                        this.lists = Response.data.results;
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
